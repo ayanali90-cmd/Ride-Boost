@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RideBoost Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Body and font */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f9f9f9, #e0f7fa);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Login card */
+    .login-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      border: 5px solid #0b4945;
+    }
+
+    /* Logo */
+    .login-container img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    /* Heading */
+    .login-container h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, orange, red);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Form group */
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #0b4945;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid #0b4945;
+      box-sizing: border-box;
+      transition: 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: orange;
+      outline: none;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      height: 14px;
+      margin-top: 2px;
+    }
+
+    /* Login button */
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, orange, red);
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    /* Footer text */
+    .login-container p {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #0b4945;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <img src="Ride Boost logo.png" alt="RideBoost Logo">
+  <h2>RideBoost Login</h2>
+
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name">
+      <div class="error" id="nameError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Mobile:</label>
+      <input type="text" id="mobile" placeholder="Enter your mobile">
+      <div class="error" id="mobileError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Enter your email">
+      <div class="error" id="emailError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password">
+      <div class="error" id="passwordError"></div>
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p>Welcome to RideBoost! All bikes. All details. One place.</p>
+</div>
+
+<script>
+  // Redirect if already logged in
+  if (localStorage.getItem("loggedIn") === "true") {
+    window.location.href = "Ride Boost.html";
+  }
+
+  // Form validation
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let isValid = true;
+    document.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+    const nameRegex = /^[A-Za-z\s]{3,}$/;
+    const mobileRegex = /^(\+92[0-9]{10}|03[0-9]{9})$/;
+    const emailRegex = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    let name = document.getElementById("name").value.trim();
+    let mobile = document.getElementById("mobile").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    if (!nameRegex.test(name)) {
+      document.getElementById("nameError").textContent = "Enter a valid name (min 3 letters)";
+      isValid = false;
+    }
+
+    if (!mobileRegex.test(mobile)) {
+      document.getElementById("mobileError").textContent = "Enter a valid mobile (+92300... or 0300...)";
+      isValid = false;
+    }
+
+    if (!emailRegex.test(email)) {
+      document.getElementById("emailError").textContent = "Enter a valid email";
+      isValid = false;
+    }
+
+    if (!passwordRegex.test(password)) {
+      document.getElementById("passwordError").textContent = "Password must be 8+ chars, include uppercase, lowercase, number & symbol";
+      isValid = false;
+    }
+
+    if (isValid) {
+      localStorage.setItem("loggedIn", "true");
+      alert("Login successful!");
+      window.location.href = "Ride Boost.html";
+    }
+  });
+</script>
+
+</body>
+</html>
