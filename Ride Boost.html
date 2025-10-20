@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RideBoost</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Login protection -->
+  <script>
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #f9f9f9, #e0f7fa);
+      margin: 0;
+      padding: 0 10px;
+    }
+
+    /* Marquee */
+    marquee {
+      font-size: 20px;
+      color: #0b4945;
+      margin-top: 10px;
+    }
+
+    /* Logo and heading */
+    .logo-container img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-top: 10px;
+    }
+
+    h1 {
+      font-weight: bold;
+      font-size: 28px;
+      background: linear-gradient(90deg, orange, red);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 10px 0 30px;
+    }
+
+    /* Bike cards */
+    .bike-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .item {
+      width: 300px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 5px solid #0b4945;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    .item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .item p {
+      font-weight: bold;
+      margin: 10px 0;
+      color: #0b4945;
+    }
+
+    /* Logout button */
+    .logout-btn {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: #ff4747;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #d63636;
+    }
+
+    @media (max-width: 650px) {
+      .item {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<marquee>🚴 Welcome to RideBoost – Your Destination for Bikes & E-Bikes! ⚡</marquee>
+
+<div class="logo-container">
+  <img src="Ride Boost logo.png" alt="RideBoost Logo">
+  <h1>All bikes. All details. One place.</h1>
+</div>
+
+<!-- Logout -->
+<button class="logout-btn" onclick="logout()">Logout</button>
+
+<!-- Bike sections -->
+<div class="bike-container">
+  <div class="item" onclick="location.href='Petrol Bikes.html'">
+    <img src="Petrol Bikes.png" alt="Petrol Bike">
+    <p>Feel the roar, Rule the road</p>
+  </div>
+
+  <div class="item" onclick="location.href='Electric Bikes.html'">
+    <img src="E-Bike.png" alt="Electric Bike">
+    <p>ECO-power in every pedal</p>
+  </div>
+</div>
+
+<script>
+  alert("Motorcycle prices change frequently — never stay the same!");
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>
